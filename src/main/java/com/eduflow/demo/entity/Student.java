@@ -1,5 +1,6 @@
 package com.eduflow.demo.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -17,7 +18,12 @@ public class Student {
     @Id @GeneratedValue
     private Long id;
 
-    @OneToOne
-    @JoinColumn(name = "user_id")
+    @OneToOne(
+        cascade = CascadeType.PERSIST
+    )
+    @JoinColumn(
+        name = "user_id",
+        referencedColumnName = "id"
+    )
     private User user;
 }
