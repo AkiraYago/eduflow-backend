@@ -1,7 +1,5 @@
 package com.eduflow.demo.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,6 +25,5 @@ public class Student {
         name = "user_id",
         referencedColumnName = "id"
     )
-    @JsonManagedReference
     private User user;
 }
