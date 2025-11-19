@@ -5,6 +5,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 import com.eduflow.demo.service.UserService;
+
+import jakarta.validation.Valid;
+
 import com.eduflow.demo.dto.UserDTO;
 import com.eduflow.demo.entity.User;
 
@@ -25,12 +28,12 @@ public class UserController {
     }
 
     @PostMapping
-    public UserDTO createUser(@RequestBody User user) {
+    public UserDTO createUser(@RequestBody @Valid User user) {
         return userService.createUser(user);
     }
 
     @PutMapping("/{id}")
-    public UserDTO updateUser(@PathVariable Long id, @RequestBody User userDetails) {
+    public UserDTO updateUser(@PathVariable Long id, @RequestBody @Valid User userDetails) {
         return userService.updateUser(id, userDetails);
     }
 

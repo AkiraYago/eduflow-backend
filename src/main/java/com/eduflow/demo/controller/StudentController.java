@@ -15,6 +15,9 @@ import com.eduflow.demo.dto.StudentDTO;
 import com.eduflow.demo.entity.Student;
 import com.eduflow.demo.service.StudentService;
 
+import jakarta.validation.Valid;
+
+
 @RestController
 @RequestMapping("/api/students")
 public class StudentController {
@@ -32,9 +35,11 @@ public class StudentController {
     }
 
     @PostMapping
-    public StudentDTO createStudent(@RequestBody Student student) {
+    public StudentDTO createStudent(@RequestBody @Valid Student student) {
         return studentService.saveStudent(student);
     }
+
+    // TODO: Crear endpoint UPDATE donde solo sea posible edite la información de Student, no la de User
 
     @DeleteMapping("/{id}")
     public void deleteStudent(@PathVariable Long id) {
