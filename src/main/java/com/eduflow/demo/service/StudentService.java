@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.eduflow.demo.dto.StudentDTO;
 import com.eduflow.demo.entity.Student;
+import com.eduflow.demo.exception.NotFoundException;
 import com.eduflow.demo.mapper.StudentMapper;
 import com.eduflow.demo.repository.StudentRepository;
 
@@ -20,23 +21,21 @@ public class StudentService {
     }
 
     public StudentDTO getStudentById(Long id) {
-        return StudentMapper.toDTO(studentRepository.findById(id).orElse(null));
+        Student studentFound = studentRepository.findById(id)
+        .orElseThrow(() -> new NotFoundException("Student not found"));
+
+        return StudentMapper.toDTO(studentFound);
     }
 
     public StudentDTO saveStudent(Student student) {
-        return StudentMapper.toDTO(studentRepository.save(student));
-    }
-
-    public StudentDTO updateStudent(Long id, Student studentDetails) {
-        Student student = studentRepository.findById(id)
-        .orElseThrow(() -> new RuntimeException("Student not found with id: " + id));
-
-        student.setUser(studentDetails.getUser());
-
+        // TODO: Crear "CreateStudentRequest"
         return StudentMapper.toDTO(studentRepository.save(student));
     }
 
     public void deleteStudent(Long id) {
+        studentRepository.findById(id)
+        .orElseThrow(() -> new NotFoundException("Student not found"));
+
         studentRepository.deleteById(id);
     }
 }
