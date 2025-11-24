@@ -3,6 +3,7 @@ package com.eduflow.demo.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,9 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.eduflow.demo.dto.StudentDTO;
 import com.eduflow.demo.entity.Student;
 import com.eduflow.demo.service.StudentService;
-
-import jakarta.validation.Valid;
-
 
 @RestController
 @RequestMapping("/api/students")
@@ -35,7 +33,7 @@ public class StudentController {
     }
 
     @PostMapping
-    public StudentDTO createStudent(@RequestBody @Valid Student student) {
+    public StudentDTO createStudent(@RequestBody @Validated Student student) {
         return studentService.saveStudent(student);
     }
 
